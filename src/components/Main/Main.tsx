@@ -13,6 +13,7 @@ const Main = ({ filteredBookmarks }: mainProps) => {
           <p>{b.title}</p>
           <p>{b.url}</p>
           <p>{b.description}</p>
+          <p>#{b.tags}</p>
         </div>
       ))}
     </div>
