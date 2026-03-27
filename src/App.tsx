@@ -1,10 +1,11 @@
 import "./App.css";
-import { useState, type FormEvent } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import { bookmarksData } from "./data/data";
 import type { Bookmark } from "./types/bookmark";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home";
+import Archived from "./pages/Archived";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -13,6 +14,7 @@ function App() {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [tagsInput, setTagsInput] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,8 +38,19 @@ function App() {
     const matchesSearch = bookmark.title
       .toLowerCase()
       .includes(search.toLowerCase());
-    return matchesSearch;
+
+    const matchesTags =
+      selectedTags.length === 0 ||
+      selectedTags.some((tag) => bookmark.tags.includes(tag));
+
+    return matchesSearch && matchesTags;
   });
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    );
+  };
 
   const allTags: string[] = [];
   for (const bookmark of bookmarks) {
@@ -47,9 +60,10 @@ function App() {
       }
     }
   }
+
   return (
-    <>
-      <Header
+    <BrowserRouter>
+      <Layout
         search={search}
         setSearch={setSearch}
         title={title}
@@ -61,10 +75,18 @@ function App() {
         tagsInput={tagsInput}
         setTagsInput={setTagsInput}
         handleAddBookmark={handleAddBookmark}
-      />
-      <Main filteredBookmarks={filteredBookmarks} />
-      <Sidebar allTags={allTags} />
-    </>
+        allTags={allTags}
+        selectedTags={selectedTags}
+        toggleTag={toggleTag}
+      >
+        <Routes>
+          <Route
+            path="/"
+            element={<Home filteredBookmarks={filteredBookmarks} />}
+          />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
