@@ -6,6 +6,7 @@ import type { Bookmark } from "./types/bookmark";
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home";
 import Archived from "./pages/Archived";
+import AddBookmark from "./components/AddBookmark/AddBookmark";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -15,6 +16,7 @@ function App() {
   const [description, setDescription] = useState("");
   const [tagsInput, setTagsInput] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [addProductModal, setAddProductModal] = useState(false);
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ function App() {
     setDescription("");
     setUrl("");
     setTagsInput("");
+    setAddProductModal(false);
   };
 
   const filteredBookmarks = bookmarks.filter((bookmark) => {
@@ -51,6 +54,14 @@ function App() {
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     );
   };
+
+  const onClose = () => {
+        setTitle("");
+        setDescription("");
+        setUrl("");
+        setTagsInput("");
+        setAddProductModal(false);
+  }
 
   const allTags: string[] = [];
   for (const bookmark of bookmarks) {
@@ -78,7 +89,23 @@ function App() {
         allTags={allTags}
         selectedTags={selectedTags}
         toggleTag={toggleTag}
+        setAddProductModal={setAddProductModal}
       >
+        {addProductModal && (
+          <AddBookmark
+            title={title}
+            setTitle={setTitle}
+            url={url}
+            setUrl={setUrl}
+            description={description}
+            setDescription={setDescription}
+            tagsInput={tagsInput}
+            setTagsInput={setTagsInput}
+            handleAddBookmark={handleAddBookmark}
+            setAddProductModal={setAddProductModal}
+            onClose={onClose}
+          />
+        )}
         <Routes>
           <Route
             path="/"

@@ -5,30 +5,21 @@ import styles from "./Layout.module.css";
 
 type LayoutProps = {
   children: ReactNode;
-
-  // search
   search: string;
   setSearch: (value: string) => void;
-
-  // form fields
   title: string;
   setTitle: (value: string) => void;
-
   url: string;
   setUrl: (value: string) => void;
-
   description: string;
   setDescription: (value: string) => void;
-
   tagsInput: string;
   setTagsInput: (value: string) => void;
-
   handleAddBookmark: (e: FormEvent) => void;
-
-  // tags
   allTags: string[];
   selectedTags: string[];
   toggleTag: (tag: string) => void;
+  setAddProductModal: (value: boolean) => void;
 };
 
 function Layout({
@@ -47,6 +38,7 @@ function Layout({
   allTags,
   selectedTags,
   toggleTag,
+  setAddProductModal,
 }: LayoutProps) {
   return (
     <div className={styles.pageWrapper}>
@@ -70,6 +62,7 @@ function Layout({
           tagsInput={tagsInput}
           setTagsInput={setTagsInput}
           handleAddBookmark={handleAddBookmark}
+          setAddProductModal={setAddProductModal}
         />
 
         <main>{children}</main>
