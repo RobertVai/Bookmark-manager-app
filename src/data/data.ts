@@ -5,7 +5,7 @@ export const bookmarksData: Bookmark[] = [
     id: 1,
     title: "GitHub",
     url: "https://github.com",
-    favicon: "./assets/images/favicon-github.png",
+    favicon: "./public/images/favicon-github.png",
     description:
       "Where the world builds software. Millions of developers and companies build, ship, and maintain their software on GitHub.",
     tags: ["Tools", "Community", "Git"],
@@ -19,7 +19,7 @@ export const bookmarksData: Bookmark[] = [
     id: 2,
     title: "Stack Overflow",
     url: "https://stackoverflow.com",
-    favicon: "./assets/images/favicon-stack-overflow.png",
+    favicon: "./public/images/favicon-stack-overflow.png",
     description:
       "The largest, most trusted online community for developers to learn, share their knowledge, and build their careers.",
     tags: ["Community", "Reference", "Tips"],
@@ -33,7 +33,7 @@ export const bookmarksData: Bookmark[] = [
     id: 3,
     title: "MDN Web Docs",
     url: "https://developer.mozilla.org",
-    favicon: "./assets/images/favicon-mdn.png",
+    favicon: "./public/images/favicon-mdn.png",
     description:
       "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.",
     tags: ["Reference", "HTML", "CSS", "JavaScript"],
@@ -47,7 +47,7 @@ export const bookmarksData: Bookmark[] = [
     id: 4,
     title: "CSS-Tricks",
     url: "https://css-tricks.com",
-    favicon: "./assets/images/favicon-css-tricks.png",
+    favicon: "./public/images/favicon-css-tricks.png",
     description:
       "Daily articles about CSS, HTML, JavaScript, and all things related to web design and development.",
     tags: ["CSS", "Tutorial", "Tips"],
@@ -61,7 +61,7 @@ export const bookmarksData: Bookmark[] = [
     id: 5,
     title: "Frontend Mentor",
     url: "https://www.frontendmentor.io",
-    favicon: "./assets/images/favicon-frontend-mentor.png",
+    favicon: "./public/images/favicon-frontend-mentor.png",
     description:
       "Improve your front-end coding skills by building real projects. Solve real-world HTML, CSS and JavaScript challenges whilst working to professional designs.",
     tags: ["Practice", "Learning", "Community"],
@@ -75,7 +75,7 @@ export const bookmarksData: Bookmark[] = [
     id: 6,
     title: "Smashing Magazine",
     url: "https://www.smashingmagazine.com",
-    favicon: "./assets/images/favicon-smashing-magazine.png",
+    favicon: "./public/images/favicon-smashing-magazine.png",
     description:
       "For web designers and developers. Articles on CSS, JavaScript, front-end, UX, design systems, and more.",
     tags: ["Design", "Tutorial", "Performance"],
@@ -89,7 +89,7 @@ export const bookmarksData: Bookmark[] = [
     id: 7,
     title: "Can I Use",
     url: "https://caniuse.com",
-    favicon: "./assets/images/favicon-caniuse.png",
+    favicon: "./public/images/favicon-caniuse.png",
     description:
       "Support tables for HTML5, CSS3, etc. Check browser compatibility for web technologies.",
     tags: ["Tools", "Reference", "Compatibility"],
@@ -103,7 +103,7 @@ export const bookmarksData: Bookmark[] = [
     id: 8,
     title: "CodePen",
     url: "https://codepen.io",
-    favicon: "./assets/images/favicon-codepen.png",
+    favicon: "./public/images/favicon-codepen.png",
     description:
       "An online code editor and social development environment for front-end designers and developers.",
     tags: ["Tools", "Practice", "Community"],
@@ -117,7 +117,7 @@ export const bookmarksData: Bookmark[] = [
     id: 9,
     title: "CSS Grid Garden",
     url: "https://cssgridgarden.com",
-    favicon: "./assets/images/favicon-css-grid-garden.png",
+    favicon: "./public/images/favicon-css-grid-garden.png",
     description:
       "A game for learning CSS grid layout. Grow your carrot garden by writing CSS grid code.",
     tags: ["CSS", "Practice", "Layout"],
@@ -131,7 +131,7 @@ export const bookmarksData: Bookmark[] = [
     id: 10,
     title: "Flexbox Froggy",
     url: "https://flexboxfroggy.com",
-    favicon: "./assets/images/favicon-flexbox-froggy.png",
+    favicon: "./public/images/favicon-flexbox-froggy.png",
     description:
       "A game where you help Froggy and friends by writing CSS flexbox code.",
     tags: ["CSS", "Practice", "Layout"],
@@ -145,7 +145,7 @@ export const bookmarksData: Bookmark[] = [
     id: 11,
     title: "freeCodeCamp",
     url: "https://www.freecodecamp.org",
-    favicon: "./assets/images/favicon-freecodecamp.png",
+    favicon: "./public/images/favicon-freecodecamp.png",
     description:
       "Learn to code for free. Build projects. Earn certifications. An open source community that helps you learn to code with free online courses and certifications.",
     tags: ["Learning", "Practice", "Community"],
@@ -159,7 +159,7 @@ export const bookmarksData: Bookmark[] = [
     id: 12,
     title: "JavaScript.info",
     url: "https://javascript.info",
-    favicon: "./assets/images/favicon-javascript-info.png",
+    favicon: "./public/images/favicon-javascript-info.png",
     description:
       "The Modern JavaScript Tutorial. How it's done now. From the basics to advanced topics with simple, but detailed explanations.",
     tags: ["JavaScript", "Tutorial", "Learning"],
@@ -173,7 +173,7 @@ export const bookmarksData: Bookmark[] = [
     id: 13,
     title: "Dev.to",
     url: "https://dev.to",
-    favicon: "./assets/images/favicon-dev.png",
+    favicon: "./public/images/favicon-dev.png",
     description:
       "A constructive and inclusive social network for software developers. Share knowledge and grow your career.",
     tags: ["Community", "Learning", "Tips"],
@@ -187,7 +187,7 @@ export const bookmarksData: Bookmark[] = [
     id: 14,
     title: "Tailwind CSS",
     url: "https://tailwindcss.com",
-    favicon: "./assets/images/favicon-tailwind.png",
+    favicon: "./public/images/favicon-tailwind.png",
     description:
       "A utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.",
     tags: ["CSS", "Framework", "Tools"],
@@ -201,7 +201,7 @@ export const bookmarksData: Bookmark[] = [
     id: 15,
     title: "Web.dev",
     url: "https://web.dev",
-    favicon: "./assets/images/favicon-web-dev.png",
+    favicon: "./public/images/favicon-web-dev.png",
     description:
       "Guidance to build modern web experiences that work on any browser. Learn about web vitals, PWAs, and more.",
     tags: ["Performance", "Learning", "Tips"],
@@ -215,7 +215,7 @@ export const bookmarksData: Bookmark[] = [
     id: 16,
     title: "Claude",
     url: "https://claude.ai",
-    favicon: "./assets/images/favicon-claude.png",
+    favicon: "./public/images/favicon-claude.png",
     description:
       "An AI assistant created by Anthropic that can help with analysis, writing, coding, math, and creative tasks through natural conversation.",
     tags: ["Tools", "AI", "Learning"],
@@ -229,7 +229,7 @@ export const bookmarksData: Bookmark[] = [
     id: 17,
     title: "React Docs",
     url: "https://react.dev",
-    favicon: "./assets/images/favicon-react-docs.png",
+    favicon: "./public/images/favicon-react-docs.png",
     description:
       "The library for web and native user interfaces. Build user interfaces out of individual pieces called components.",
     tags: ["JavaScript", "Framework", "Reference"],
@@ -243,7 +243,7 @@ export const bookmarksData: Bookmark[] = [
     id: 18,
     title: "Flexbox Zombies",
     url: "https://mastery.games/flexboxzombies",
-    favicon: "./assets/images/favicon-flexbox-zombies.png",
+    favicon: "./public/images/favicon-flexbox-zombies.png",
     description:
       "Master flexbox layout in CSS by playing a survival game. Use flexbox to position your crossbow and survive the zombie apocalypse.",
     tags: ["CSS", "Practice", "Layout"],

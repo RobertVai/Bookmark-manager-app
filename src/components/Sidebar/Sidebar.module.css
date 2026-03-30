@@ -1,3 +1,47 @@
+aside {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.mainLogo {
+  padding-top: 0.5rem;
+}
+.pageNav {
+  display: flex;
+}
+
+.pageNavContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.7rem;
+  gap: 1rem;
+}
 .tagline {
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tagsColumn {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  gap: 1.5rem;
+}
+
+.tagsTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.tag {
+  color: #4c5c59;
+  font-weight: 700;
 }

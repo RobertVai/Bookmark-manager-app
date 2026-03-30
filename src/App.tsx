@@ -17,6 +17,7 @@ function App() {
   const [tagsInput, setTagsInput] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [addProductModal, setAddProductModal] = useState(false);
+  const [settings,setSettings] = useState<number | null>(null)
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,12 +57,12 @@ function App() {
   };
 
   const onClose = () => {
-        setTitle("");
-        setDescription("");
-        setUrl("");
-        setTagsInput("");
-        setAddProductModal(false);
-  }
+    setTitle("");
+    setDescription("");
+    setUrl("");
+    setTagsInput("");
+    setAddProductModal(false);
+  };
 
   const allTags: string[] = [];
   for (const bookmark of bookmarks) {
@@ -90,6 +91,7 @@ function App() {
         selectedTags={selectedTags}
         toggleTag={toggleTag}
         setAddProductModal={setAddProductModal}
+
       >
         {addProductModal && (
           <AddBookmark

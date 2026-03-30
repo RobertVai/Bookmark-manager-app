@@ -1,0 +1,93 @@
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+}
+
+.mainLine h3 {
+  font-size: 1.5rem;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.titleContainer {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+}
+
+.titleContainer img {
+  max-width: 50px;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+}
+
+.description {
+  padding: 1.3rem;
+}
+
+.tag {
+  background-color: #e8f0ef;
+  font-size: 0.7rem;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem;
+}
+.tags {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.editIcon {
+  background: none;
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+}
+
+.url {
+  color: #5b6966;
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.faviconContainer h4 {
+  font-size: 1.3rem;
+}
+
+.sort {
+  background-color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid grey;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.3rem;
+}

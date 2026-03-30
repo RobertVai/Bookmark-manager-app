@@ -1,4 +1,19 @@
 .pageWrapper {
   display: grid;
   grid-template-columns: 260px 1fr;
+  max-width: 1440px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+main {
+  background-color: #e8f0ef;
+  min-height: 100vh;
+  display: flex;
+  padding: 1rem;
+}
+
+.layout {
+  min-height: 100vh;
+  background-color: #ffffff;
 }

@@ -1,4 +1,7 @@
 import React from "react";
+import styles from "./Header.module.css";
+import profileAvatar from "../../assets/images/image-avatar.webp";
+import searchIcon from "../../assets/images/icon-search.svg";
 
 type headerProps = {
   search: string;
@@ -29,14 +32,23 @@ const Header = ({
   setAddProductModal,
 }: headerProps) => {
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search by title..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <button onClick={() => setAddProductModal(true)}>Add Bookmark</button>
+    <div className={styles.topNav}>
+      <div>
+        <input
+          type="text"
+          placeholder="🔍︎Search by title..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.topRightNav}>
+        <button onClick={() => setAddProductModal(true)}>
+          <p className={styles.plus}>+</p>
+          Add Bookmark
+        </button>
+        <img src={profileAvatar} alt="" />
+      </div>
     </div>
   );
 };
