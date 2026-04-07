@@ -3,10 +3,13 @@ import type { Bookmark } from "../types/bookmark";
 
 type ArchivedProps = {
   filteredBookmarks: Bookmark[];
+  handleVisit: (id: number) => void;
 };
 
 function Archived({ filteredBookmarks }: ArchivedProps) {
-  return <Main filteredBookmarks={filteredBookmarks} />;
+  return (
+    <div></div>
+  );
 }
 
 export default Archived;

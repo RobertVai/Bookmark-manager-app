@@ -17,7 +17,8 @@ function App() {
   const [tagsInput, setTagsInput] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [addProductModal, setAddProductModal] = useState(false);
-  const [settings,setSettings] = useState<number | null>(null)
+  const [advanced, setAdvanced] = useState(false);
+  const [sortBy,setSortBy] = useState<"created" | "visited" | "views">("created")
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +29,9 @@ function App() {
       description,
       url,
       tags: tagsInput.split(","),
+      visitCount: 0,
+      createdAt: new Date().toISOString(),
+      lastVisited: null,
     };
 
     setBookmarks((prev) => [...prev, newBookmark]);
@@ -56,12 +60,35 @@ function App() {
     );
   };
 
+  const handleVisit = (id: number) => {
+    setBookmarks((prev) => {
+      return prev.map((b) =>
+        b.id === id
+          ? {
+              ...b,
+              visitCount: b.visitCount + 1,
+              lastVisited: new Date().toISOString(),
+            }
+          : b,
+      );
+    });
+  };
+
   const onClose = () => {
     setTitle("");
     setDescription("");
     setUrl("");
     setTagsInput("");
     setAddProductModal(false);
+  };
+
+  const formatShortDate = (date: string | null) => {
+    if (!date) return "Never";
+
+    return new Date(date).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+    });
   };
 
   const allTags: string[] = [];
@@ -91,7 +118,7 @@ function App() {
         selectedTags={selectedTags}
         toggleTag={toggleTag}
         setAddProductModal={setAddProductModal}
-
+        handleVisit={handleVisit}
       >
         {addProductModal && (
           <AddBookmark
@@ -111,7 +138,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home filteredBookmarks={filteredBookmarks} />}
+            element={
+              <Home
+                filteredBookmarks={filteredBookmarks}
+                handleVisit={handleVisit}
+                formatShortDate={formatShortDate}
+              />
+            }
           />
         </Routes>
       </Layout>

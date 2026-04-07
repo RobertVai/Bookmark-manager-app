@@ -4,11 +4,20 @@ import type { Bookmark } from "../../types/bookmark";
 import styles from "./Main.module.css";
 import sortIcon from "../../assets/images/icon-sort.svg";
 import editIcon from "../../assets/images/icon-menu-bookmark.svg";
+import visitIcon from "../../assets/images/icon-visit-count.svg";
+import createdIcon from "../../assets/images/icon-created.svg";
+import lastVisitedIcon from "../../assets/images/icon-last-visited.svg";
 
 type mainProps = {
   filteredBookmarks: Bookmark[];
+  handleVisit: (id: number) => void;
+  formatShortDate: (date: string | null) => string;
 };
-const Main = ({ filteredBookmarks }: mainProps) => {
+const Main = ({
+  filteredBookmarks,
+  handleVisit,
+  formatShortDate,
+}: mainProps) => {
   return (
     <div>
       <div className={styles.mainLine}>
@@ -34,6 +43,7 @@ const Main = ({ filteredBookmarks }: mainProps) => {
                     href={b.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleVisit(b.id)}
                   >
                     {b.url}
                   </a>
@@ -53,6 +63,20 @@ const Main = ({ filteredBookmarks }: mainProps) => {
                   {tag}
                 </div>
               ))}
+            </div>
+            <div className={styles.cardFooter}>
+              <div className={styles.dateElement}>
+                <img src={visitIcon} alt="" />
+                <p>{b.visitCount}</p>
+              </div>
+              <div className={styles.dateElement}>
+                <img src={createdIcon} alt="" />
+                <p>{formatShortDate(b.createdAt)}</p>
+              </div>
+              <div className={styles.dateElement}>
+                <img src={lastVisitedIcon} alt="" />
+                <p>{formatShortDate(b.lastVisited)}</p>
+              </div>
             </div>
           </div>
         ))}
