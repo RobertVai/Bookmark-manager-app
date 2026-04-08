@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { bookmarksData } from "../../data/data";
 import type { Bookmark } from "../../types/bookmark";
 import styles from "./Main.module.css";
@@ -7,6 +8,7 @@ import editIcon from "../../assets/images/icon-menu-bookmark.svg";
 import visitIcon from "../../assets/images/icon-visit-count.svg";
 import createdIcon from "../../assets/images/icon-created.svg";
 import lastVisitedIcon from "../../assets/images/icon-last-visited.svg";
+import BookmarkAdvanced from "../BookmarkAdvanced/BookmarkAdvanced";
 
 type mainProps = {
   filteredBookmarks: Bookmark[];
@@ -18,6 +20,7 @@ const Main = ({
   handleVisit,
   formatShortDate,
 }: mainProps) => {
+  const [advanced, setAdvanced] = useState<number | null>(null);
   return (
     <div>
       <div className={styles.mainLine}>
@@ -50,10 +53,14 @@ const Main = ({
                 </div>
               </div>
 
-              <button className={styles.editIcon}>
+              <button
+                onClick={() => setAdvanced(advanced === b.id ? null : b.id)}
+                className={styles.editIcon}
+              >
                 <img src={editIcon} alt="" />
               </button>
             </div>
+            {advanced === b.id && <BookmarkAdvanced />}
             <div className={styles.description}>
               <p>{b.description}</p>
             </div>

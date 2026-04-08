@@ -7,6 +7,7 @@ import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home";
 import Archived from "./pages/Archived";
 import AddBookmark from "./components/AddBookmark/AddBookmark";
+import BookmarkAdvanced from "./components/BookmarkAdvanced/BookmarkAdvanced";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -17,11 +18,13 @@ function App() {
   const [tagsInput, setTagsInput] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [addProductModal, setAddProductModal] = useState(false);
-  const [advanced, setAdvanced] = useState(false);
-  const [sortBy,setSortBy] = useState<"created" | "visited" | "views">("created")
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!title.trim() || !url.trim()) {
+      return;
+    }
 
     const newBookmark: Bookmark = {
       id: Math.random(),
@@ -75,11 +78,11 @@ function App() {
   };
 
   const onClose = () => {
+    setAddProductModal(false);
     setTitle("");
     setDescription("");
     setUrl("");
     setTagsInput("");
-    setAddProductModal(false);
   };
 
   const formatShortDate = (date: string | null) => {
@@ -135,6 +138,7 @@ function App() {
             onClose={onClose}
           />
         )}
+
         <Routes>
           <Route
             path="/"

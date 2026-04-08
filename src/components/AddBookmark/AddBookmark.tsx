@@ -31,33 +31,50 @@ const AddBookmark = ({
     <div className={styles.bookmarkContainer}>
       <div className={styles.bookmarkContent}>
         <h3>Add a Bookmark</h3>
-        <p>Save a link with details to keep your collection organized</p>
+        <p className={styles.faviconInfo}>
+          Save a link with details to keep your collection organized. We extract
+          the favicon automatically from the URL.
+        </p>
         <form onSubmit={handleAddBookmark}>
-          <p>Title*</p>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <p>Description*</p>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-          <p>Website URL*</p>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <p>Tags*</p>
-          <input
-            type="text"
-            value={tagsInput}
-            onChange={(e) => setTagsInput(e.target.value)}
-          />
-          <div>
-            <button onClick={() => onClose}>Cancel</button>
+          <div className={styles.bookmarkRow}>
+            <p>Title*</p>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.bookmarkRow}>
+            <p>Description*</p>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
+
+          <div className={styles.bookmarkRow}>
+            <p>Website URL*</p>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.bookmarkRow}>
+            <p>Tags*</p>
+            <input
+              type="text"
+              value={tagsInput}
+              onChange={(e) => setTagsInput(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.bookmarkFooter}>
+            <button className={styles.cancelBtn} onClick={onClose}>
+              Cancel
+            </button>
             <button type="submit">Add Bookmark</button>
           </div>
         </form>

@@ -1,0 +1,17 @@
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+}
+
+.advancedContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  background-color: white;
+}
