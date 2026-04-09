@@ -63,6 +63,12 @@ function App() {
     );
   };
 
+  const deleteBookmark = (id: number) => {
+    setBookmarks((prev) => {
+      return prev.filter((b) => b.id !== id);
+    });
+  };
+
   const handleVisit = (id: number) => {
     setBookmarks((prev) => {
       return prev.map((b) =>
@@ -75,6 +81,15 @@ function App() {
           : b,
       );
     });
+  };
+
+  const handleCopyUrl = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert("Copied to clipboard!");
+    } catch (error) {
+      alert("Error copying");
+    }
   };
 
   const onClose = () => {
@@ -147,6 +162,8 @@ function App() {
                 filteredBookmarks={filteredBookmarks}
                 handleVisit={handleVisit}
                 formatShortDate={formatShortDate}
+                deleteBookmark={deleteBookmark}
+                handleCopyUrl={handleCopyUrl}
               />
             }
           />

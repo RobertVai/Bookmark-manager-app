@@ -14,11 +14,15 @@ type mainProps = {
   filteredBookmarks: Bookmark[];
   handleVisit: (id: number) => void;
   formatShortDate: (date: string | null) => string;
+  deleteBookmark: (id: number) => void;
+  handleCopyUrl: (url: string) => void;
 };
 const Main = ({
   filteredBookmarks,
   handleVisit,
   formatShortDate,
+  deleteBookmark,
+  handleCopyUrl
 }: mainProps) => {
   const [advanced, setAdvanced] = useState<number | null>(null);
   return (
@@ -60,7 +64,14 @@ const Main = ({
                 <img src={editIcon} alt="" />
               </button>
             </div>
-            {advanced === b.id && <BookmarkAdvanced />}
+            {advanced === b.id && (
+              <BookmarkAdvanced
+                handleVisit={handleVisit}
+                b={b}
+                deleteBookmark={deleteBookmark}
+                handleCopyUrl={handleCopyUrl}
+              />
+            )}
             <div className={styles.description}>
               <p>{b.description}</p>
             </div>

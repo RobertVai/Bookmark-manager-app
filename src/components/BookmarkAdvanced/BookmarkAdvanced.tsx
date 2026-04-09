@@ -4,15 +4,33 @@ import copyIcon from "../../assets/images/icon-last-visited.svg";
 import unarchiveIcon from "../../assets/images/icon-unarchive.svg";
 import deleteIcon from "../../assets/images/icon-last-visited.svg";
 import styles from "./BookmarkAdvanced.module.css";
+import type { Bookmark } from "../../types/bookmark";
 
-const BookmarkAdvanced = () => {
+type BookmarkAdvancedProps = {
+  handleVisit: (id: number) => void;
+  b: Bookmark;
+  deleteBookmark: (id: number) => void;
+  handleCopyUrl: (url: string) => void;
+};
+const BookmarkAdvanced = ({
+  handleVisit,
+  b,
+  deleteBookmark,
+  handleCopyUrl,
+}: BookmarkAdvancedProps) => {
   return (
     <div className={styles.advancedContainer}>
       <ul>
-        <li>Visit</li>
-        <li>Copy URL</li>
+        <li onClick={() => handleVisit(b.id)}>
+          <a href={b.url} target="_blank" rel="noopener noreferrer">
+            Visit
+          </a>
+        </li>
+        <li>Edit</li>
+        <li onClick={() => handleCopyUrl(b.url)}>Copy URL</li>
+
         <li>Unarchive</li>
-        <li>Delete Permanently</li>
+        <li onClick={() => deleteBookmark(b.id)}>Delete Permanently</li>
       </ul>
     </div>
   );
