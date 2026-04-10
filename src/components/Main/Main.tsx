@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { bookmarksData } from "../../data/data";
 import type { Bookmark } from "../../types/bookmark";
@@ -16,23 +15,66 @@ type mainProps = {
   formatShortDate: (date: string | null) => string;
   deleteBookmark: (id: number) => void;
   handleCopyUrl: (url: string) => void;
+  sortBy: string;
+  setSortBy: (value: any) => void;
 };
 const Main = ({
   filteredBookmarks,
   handleVisit,
   formatShortDate,
   deleteBookmark,
-  handleCopyUrl
+  handleCopyUrl,
+  sortBy,
+  setSortBy,
 }: mainProps) => {
   const [advanced, setAdvanced] = useState<number | null>(null);
+  const [sortMenu, setSortMenu] = useState(false);
+
+  const handleSortMenu = () => {
+    setSortMenu(!sortMenu);
+  };
+
   return (
     <div>
       <div className={styles.mainLine}>
         <h3>All bookmarks</h3>
-        <button className={styles.sort}>
-          <img src={sortIcon} alt="" />
-          Sort by
-        </button>
+        <div className={styles.sortWrapper}>
+          <button onClick={handleSortMenu} className={styles.sort}>
+            <img src={sortIcon} alt="" />
+            Sort by
+          </button>
+
+          {sortMenu && (
+            <div className={styles.sortMenu}>
+              <button
+                onClick={() => {
+                  setSortBy("created");
+                  setSortMenu(false);
+                }}
+              >
+                Recently added
+              </button>
+
+              <button
+                onClick={() => {
+                  setSortBy("visited");
+                  setSortMenu(false);
+                }}
+              >
+                Recently visited
+              </button>
+
+              <button
+                onClick={() => {
+                  setSortBy("views");
+                  setSortMenu(false);
+                }}
+              >
+                Most visited
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles.cards}>
         {filteredBookmarks.map((b) => (

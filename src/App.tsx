@@ -18,6 +18,9 @@ function App() {
   const [tagsInput, setTagsInput] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [addProductModal, setAddProductModal] = useState(false);
+  const [sortBy, setSortBy] = useState<"created" | "visited" | "views">(
+    "created",
+  );
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +58,23 @@ function App() {
       selectedTags.some((tag) => bookmark.tags.includes(tag));
 
     return matchesSearch && matchesTags;
+  });
+
+  const sortedBookmarks = [...filteredBookmarks].sort((a, b) => {
+    if (sortBy === "visited") {
+      const aTime = a.lastVisited ? new Date(a.lastVisited).getTime() : 0;
+      const bTime = b.lastVisited ? new Date(b.lastVisited).getTime() : 0;
+      return bTime - aTime;
+    }
+    if (sortBy === "created") {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }
+
+    if (sortBy === "views") {
+      return b.visitCount - a.visitCount;
+    }
+
+    return 0;
   });
 
   const toggleTag = (tag: string) => {
@@ -159,11 +179,13 @@ function App() {
             path="/"
             element={
               <Home
-                filteredBookmarks={filteredBookmarks}
+                filteredBookmarks={sortedBookmarks}
                 handleVisit={handleVisit}
                 formatShortDate={formatShortDate}
                 deleteBookmark={deleteBookmark}
                 handleCopyUrl={handleCopyUrl}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
               />
             }
           />

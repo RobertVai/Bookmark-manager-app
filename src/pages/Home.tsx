@@ -7,9 +7,20 @@ type HomeProps = {
   formatShortDate: (date: string | null) => string;
   deleteBookmark: (id: number) => void;
   handleCopyUrl: (url: string) => void;
+  sortBy: string;
+  setSortBy: (value: any) => void;
 };
 
-function Home({ filteredBookmarks, handleVisit, formatShortDate, deleteBookmark,handleCopyUrl }: HomeProps) {
+function Home({
+  filteredBookmarks,
+
+  handleVisit,
+  formatShortDate,
+  deleteBookmark,
+  handleCopyUrl,
+  sortBy,
+  setSortBy,
+}: HomeProps) {
   return (
     <Main
       filteredBookmarks={filteredBookmarks}
@@ -17,6 +28,8 @@ function Home({ filteredBookmarks, handleVisit, formatShortDate, deleteBookmark,
       formatShortDate={formatShortDate}
       deleteBookmark={deleteBookmark}
       handleCopyUrl={handleCopyUrl}
+      sortBy={sortBy}
+      setSortBy={setSortBy}
     />
   );
 }
