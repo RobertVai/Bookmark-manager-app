@@ -11,12 +11,14 @@ type BookmarkAdvancedProps = {
   b: Bookmark;
   deleteBookmark: (id: number) => void;
   handleCopyUrl: (url: string) => void;
+  handleEditBookmark: (bookmark: Bookmark) => void;
 };
 const BookmarkAdvanced = ({
   handleVisit,
   b,
   deleteBookmark,
   handleCopyUrl,
+  handleEditBookmark,
 }: BookmarkAdvancedProps) => {
   return (
     <div className={styles.advancedContainer}>
@@ -26,7 +28,7 @@ const BookmarkAdvanced = ({
             Visit
           </a>
         </li>
-        <li>Edit</li>
+        <li onClick={() => handleEditBookmark(b)}>Edit</li>
         <li onClick={() => handleCopyUrl(b.url)}>Copy URL</li>
 
         <li>Unarchive</li>

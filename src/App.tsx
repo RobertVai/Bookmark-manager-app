@@ -21,6 +21,16 @@ function App() {
   const [sortBy, setSortBy] = useState<"created" | "visited" | "views">(
     "created",
   );
+  const [editBookmarkId, setEditBookmarkId] = useState<number | null>(null);
+
+  const handleEditBookmark = (bookmark: Bookmark) => {
+    setTitle(bookmark.title);
+    setDescription(bookmark.description);
+    setUrl(bookmark.url);
+    setTagsInput(bookmark.tags.join(","));
+    setEditBookmarkId(bookmark.id);
+    setAddProductModal(true);
+  };
 
   const handleAddBookmark = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,23 +39,40 @@ function App() {
       return;
     }
 
-    const newBookmark: Bookmark = {
-      id: Math.random(),
-      title,
-      description,
-      url,
-      tags: tagsInput.split(","),
-      visitCount: 0,
-      createdAt: new Date().toISOString(),
-      lastVisited: null,
-    };
+    if (editBookmarkId !== null) {
+      setBookmarks((prev) =>
+        prev.map((bookmark) =>
+          bookmark.id === editBookmarkId
+            ? {
+                ...bookmark,
+                title,
+                url,
+                description,
+                tags: tagsInput.split(",").map((t) => t.trim()),
+              }
+            : bookmark,
+        ),
+      );
+    } else {
+      const newBookmark: Bookmark = {
+        id: Date.now(),
+        title,
+        description,
+        url,
+        tags: tagsInput.split(","),
+        visitCount: 0,
+        createdAt: new Date().toISOString(),
+        lastVisited: null,
+      };
 
-    setBookmarks((prev) => [...prev, newBookmark]);
+      setBookmarks((prev) => [...prev, newBookmark]);
+    }
     setTitle("");
     setDescription("");
     setUrl("");
     setTagsInput("");
     setAddProductModal(false);
+    setEditBookmarkId(null);
   };
 
   const filteredBookmarks = bookmarks.filter((bookmark) => {
@@ -171,6 +198,7 @@ function App() {
             handleAddBookmark={handleAddBookmark}
             setAddProductModal={setAddProductModal}
             onClose={onClose}
+            editBookmarkId={editBookmarkId}
           />
         )}
 
@@ -186,6 +214,7 @@ function App() {
                 handleCopyUrl={handleCopyUrl}
                 sortBy={sortBy}
                 setSortBy={setSortBy}
+                handleEditBookmark={handleEditBookmark}
               />
             }
           />

@@ -9,6 +9,7 @@ type HomeProps = {
   handleCopyUrl: (url: string) => void;
   sortBy: string;
   setSortBy: (value: any) => void;
+  handleEditBookmark: (bookmark: Bookmark) => void;
 };
 
 function Home({
@@ -20,6 +21,7 @@ function Home({
   handleCopyUrl,
   sortBy,
   setSortBy,
+  handleEditBookmark
 }: HomeProps) {
   return (
     <Main
@@ -30,6 +32,7 @@ function Home({
       handleCopyUrl={handleCopyUrl}
       sortBy={sortBy}
       setSortBy={setSortBy}
+      handleEditBookmark={handleEditBookmark}
     />
   );
 }

@@ -54,7 +54,7 @@ form input {
 form textarea {
   min-width: 100%;
   max-width: 100%;
-  padding: 1.3rem;
+  padding: 0.3rem;
   border: 1px solid grey;
   border-radius: 0.5rem;
 }

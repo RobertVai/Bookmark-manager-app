@@ -13,6 +13,7 @@ type AddBookmarkProps = {
   handleAddBookmark: (e: React.FormEvent) => void;
   onClose: () => void;
   setAddProductModal: (value: boolean) => void;
+  editBookmarkId: number | null;
 };
 const AddBookmark = ({
   title,
@@ -26,11 +27,12 @@ const AddBookmark = ({
   handleAddBookmark,
   onClose,
   setAddProductModal,
+  editBookmarkId,
 }: AddBookmarkProps) => {
   return (
     <div className={styles.bookmarkContainer}>
       <div className={styles.bookmarkContent}>
-        <h3>Add a Bookmark</h3>
+        <h3>{editBookmarkId !== null ? "Edit Bookmark" : "Add a Bookmark"}</h3>
         <p className={styles.faviconInfo}>
           Save a link with details to keep your collection organized. We extract
           the favicon automatically from the URL.
@@ -75,7 +77,9 @@ const AddBookmark = ({
             <button className={styles.cancelBtn} onClick={onClose}>
               Cancel
             </button>
-            <button type="submit">Add Bookmark</button>
+            <button type="submit">
+              {editBookmarkId !== null ? "Save Changes" : "Add Bookmark"}
+            </button>
           </div>
         </form>
       </div>

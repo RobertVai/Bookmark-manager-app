@@ -17,6 +17,7 @@ type mainProps = {
   handleCopyUrl: (url: string) => void;
   sortBy: string;
   setSortBy: (value: any) => void;
+  handleEditBookmark: (bookmark: Bookmark) => void;
 };
 const Main = ({
   filteredBookmarks,
@@ -26,6 +27,7 @@ const Main = ({
   handleCopyUrl,
   sortBy,
   setSortBy,
+  handleEditBookmark
 }: mainProps) => {
   const [advanced, setAdvanced] = useState<number | null>(null);
   const [sortMenu, setSortMenu] = useState(false);
@@ -112,6 +114,7 @@ const Main = ({
                 b={b}
                 deleteBookmark={deleteBookmark}
                 handleCopyUrl={handleCopyUrl}
+                handleEditBookmark={handleEditBookmark}
               />
             )}
             <div className={styles.description}>
