@@ -10,11 +10,12 @@ type HomeProps = {
   sortBy: string;
   setSortBy: (value: any) => void;
   handleEditBookmark: (bookmark: Bookmark) => void;
+  toggleArchiveBookmark: (id: number) => void;
 };
 
 function Home({
   filteredBookmarks,
-
+  toggleArchiveBookmark,
   handleVisit,
   formatShortDate,
   deleteBookmark,
@@ -33,6 +34,7 @@ function Home({
       sortBy={sortBy}
       setSortBy={setSortBy}
       handleEditBookmark={handleEditBookmark}
+      toggleArchiveBookmark={toggleArchiveBookmark}
     />
   );
 }

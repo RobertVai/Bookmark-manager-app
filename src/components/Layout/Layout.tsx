@@ -15,13 +15,13 @@ type LayoutProps = {
   setDescription: (value: string) => void;
   tagsInput: string;
   setTagsInput: (value: string) => void;
-  handleVisit: (id:number) => void;
+  handleVisit: (id: number) => void;
   handleAddBookmark: (e: FormEvent) => void;
   allTags: string[];
   selectedTags: string[];
   toggleTag: (tag: string) => void;
   setAddProductModal: (value: boolean) => void;
-
+  setProfileDropDown: (value: boolean) => void;
 };
 
 function Layout({

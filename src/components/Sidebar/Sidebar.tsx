@@ -4,6 +4,7 @@ import styles from "./Sidebar.module.css";
 import mainLogoLight from "../../assets/images/logo-light-theme.svg";
 import iconHome from "../../assets/images/icon-home.svg";
 import iconArchive from "../../assets/images/icon-archive.svg";
+import { NavLink } from "react-router-dom";
 
 type SideBarProps = {
   allTags: string[];
@@ -17,14 +18,14 @@ const Sidebar = ({ allTags, toggleTag, selectedTags }: SideBarProps) => {
         <img src={mainLogoLight} alt="" />
       </div>
       <div className={styles.pageNavContainer}>
-        <div className={styles.pageNav}>
+        <NavLink to="/" className={styles.pageNav}>
           <img src={iconHome} alt="" />
           <p>Home</p>
-        </div>
-        <div className={styles.pageNav}>
+        </NavLink>
+        <NavLink to="/archived" className={styles.pageNav}>
           <img src={iconArchive} alt="" />
           <p>Archived</p>
-        </div>
+        </NavLink>
       </div>
 
       <div className={styles.tagsColumn}>

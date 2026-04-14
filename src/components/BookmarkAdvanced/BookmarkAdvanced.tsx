@@ -12,6 +12,7 @@ type BookmarkAdvancedProps = {
   deleteBookmark: (id: number) => void;
   handleCopyUrl: (url: string) => void;
   handleEditBookmark: (bookmark: Bookmark) => void;
+  toggleArchiveBookmark: (id: number) => void;
 };
 const BookmarkAdvanced = ({
   handleVisit,
@@ -19,6 +20,7 @@ const BookmarkAdvanced = ({
   deleteBookmark,
   handleCopyUrl,
   handleEditBookmark,
+  toggleArchiveBookmark,
 }: BookmarkAdvancedProps) => {
   return (
     <div className={styles.advancedContainer}>
@@ -31,7 +33,9 @@ const BookmarkAdvanced = ({
         <li onClick={() => handleEditBookmark(b)}>Edit</li>
         <li onClick={() => handleCopyUrl(b.url)}>Copy URL</li>
 
-        <li>Unarchive</li>
+        <li onClick={() => toggleArchiveBookmark(b.id)}>
+          {b.isArchived ? "Unarchive" : "Archive"}
+        </li>
         <li onClick={() => deleteBookmark(b.id)}>Delete Permanently</li>
       </ul>
     </div>

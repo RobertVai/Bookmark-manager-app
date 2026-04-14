@@ -69,12 +69,13 @@
   border: 1px solid gray;
   border-radius: 0.5rem;
   padding: 0.3rem;
+  cursor: pointer;
 }
 
 .url {
   color: #5b6966;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10.5px;
   text-decoration: none;
 }
 

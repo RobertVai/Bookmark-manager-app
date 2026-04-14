@@ -19,7 +19,7 @@ function App() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [addProductModal, setAddProductModal] = useState(false);
   const [sortBy, setSortBy] = useState<"created" | "visited" | "views">(
-    "created",
+    "visited",
   );
   const [editBookmarkId, setEditBookmarkId] = useState<number | null>(null);
 
@@ -63,6 +63,7 @@ function App() {
         visitCount: 0,
         createdAt: new Date().toISOString(),
         lastVisited: null,
+        isArchived: false,
       };
 
       setBookmarks((prev) => [...prev, newBookmark]);
@@ -115,6 +116,15 @@ function App() {
       return prev.filter((b) => b.id !== id);
     });
   };
+
+  const toggleArchiveBookmark = (id: number) => {
+    return setBookmarks((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, isArchived: !b.isArchived } : b)),
+    );
+  };
+
+  const activeBookmarks = bookmarks.filter((b) => !b.isArchived);
+  const archivedBookmarks = bookmarks.filter((b) => b.isArchived);
 
   const handleVisit = (id: number) => {
     setBookmarks((prev) => {
@@ -184,6 +194,7 @@ function App() {
         toggleTag={toggleTag}
         setAddProductModal={setAddProductModal}
         handleVisit={handleVisit}
+
       >
         {addProductModal && (
           <AddBookmark
@@ -208,6 +219,23 @@ function App() {
             element={
               <Home
                 filteredBookmarks={sortedBookmarks}
+                handleVisit={handleVisit}
+                formatShortDate={formatShortDate}
+                deleteBookmark={deleteBookmark}
+                handleCopyUrl={handleCopyUrl}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                handleEditBookmark={handleEditBookmark}
+                toggleArchiveBookmark={toggleArchiveBookmark}
+              />
+            }
+          />
+          <Route
+            path="/archived"
+            element={
+              <Archived
+                filteredBookmarks={archivedBookmarks}
+                toggleArchiveBookmark={toggleArchiveBookmark}
                 handleVisit={handleVisit}
                 formatShortDate={formatShortDate}
                 deleteBookmark={deleteBookmark}
