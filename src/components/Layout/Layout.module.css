@@ -7,13 +7,8 @@
 }
 
 main {
-  background-color: #e8f0ef;
+  background-color: var(--bg);
   min-height: 100vh;
   display: flex;
   padding: 1rem;
-}
-
-.layout {
-  min-height: 100vh;
-  background-color: #ffffff;
 }

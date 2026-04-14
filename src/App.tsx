@@ -22,6 +22,7 @@ function App() {
     "visited",
   );
   const [editBookmarkId, setEditBookmarkId] = useState<number | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const handleEditBookmark = (bookmark: Bookmark) => {
     setTitle(bookmark.title);
@@ -176,79 +177,82 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Layout
-        search={search}
-        setSearch={setSearch}
-        title={title}
-        setTitle={setTitle}
-        url={url}
-        setUrl={setUrl}
-        description={description}
-        setDescription={setDescription}
-        tagsInput={tagsInput}
-        setTagsInput={setTagsInput}
-        handleAddBookmark={handleAddBookmark}
-        allTags={allTags}
-        selectedTags={selectedTags}
-        toggleTag={toggleTag}
-        setAddProductModal={setAddProductModal}
-        handleVisit={handleVisit}
+    <div className={theme === "light" ? "light" : "dark"}>
+      <BrowserRouter>
+        <Layout
+          search={search}
+          setSearch={setSearch}
+          title={title}
+          setTitle={setTitle}
+          url={url}
+          setUrl={setUrl}
+          description={description}
+          setDescription={setDescription}
+          tagsInput={tagsInput}
+          setTagsInput={setTagsInput}
+          handleAddBookmark={handleAddBookmark}
+          allTags={allTags}
+          selectedTags={selectedTags}
+          toggleTag={toggleTag}
+          setAddProductModal={setAddProductModal}
+          handleVisit={handleVisit}
+          theme={theme}
+          setTheme={setTheme}
+        >
+          {addProductModal && (
+            <AddBookmark
+              title={title}
+              setTitle={setTitle}
+              url={url}
+              setUrl={setUrl}
+              description={description}
+              setDescription={setDescription}
+              tagsInput={tagsInput}
+              setTagsInput={setTagsInput}
+              handleAddBookmark={handleAddBookmark}
+              setAddProductModal={setAddProductModal}
+              onClose={onClose}
+              editBookmarkId={editBookmarkId}
+            />
+          )}
 
-      >
-        {addProductModal && (
-          <AddBookmark
-            title={title}
-            setTitle={setTitle}
-            url={url}
-            setUrl={setUrl}
-            description={description}
-            setDescription={setDescription}
-            tagsInput={tagsInput}
-            setTagsInput={setTagsInput}
-            handleAddBookmark={handleAddBookmark}
-            setAddProductModal={setAddProductModal}
-            onClose={onClose}
-            editBookmarkId={editBookmarkId}
-          />
-        )}
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                filteredBookmarks={sortedBookmarks}
-                handleVisit={handleVisit}
-                formatShortDate={formatShortDate}
-                deleteBookmark={deleteBookmark}
-                handleCopyUrl={handleCopyUrl}
-                sortBy={sortBy}
-                setSortBy={setSortBy}
-                handleEditBookmark={handleEditBookmark}
-                toggleArchiveBookmark={toggleArchiveBookmark}
-              />
-            }
-          />
-          <Route
-            path="/archived"
-            element={
-              <Archived
-                filteredBookmarks={archivedBookmarks}
-                toggleArchiveBookmark={toggleArchiveBookmark}
-                handleVisit={handleVisit}
-                formatShortDate={formatShortDate}
-                deleteBookmark={deleteBookmark}
-                handleCopyUrl={handleCopyUrl}
-                sortBy={sortBy}
-                setSortBy={setSortBy}
-                handleEditBookmark={handleEditBookmark}
-              />
-            }
-          />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  filteredBookmarks={sortedBookmarks}
+                  handleVisit={handleVisit}
+                  formatShortDate={formatShortDate}
+                  deleteBookmark={deleteBookmark}
+                  handleCopyUrl={handleCopyUrl}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  handleEditBookmark={handleEditBookmark}
+                  toggleArchiveBookmark={toggleArchiveBookmark}
+                />
+              }
+            />
+            <Route
+              path="/archived"
+              element={
+                <Archived
+                  filteredBookmarks={archivedBookmarks}
+                  toggleArchiveBookmark={toggleArchiveBookmark}
+                  handleVisit={handleVisit}
+                  formatShortDate={formatShortDate}
+                  deleteBookmark={deleteBookmark}
+                  handleCopyUrl={handleCopyUrl}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  handleEditBookmark={handleEditBookmark}
+                />
+              }
+            />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </div>
   );
 }
 

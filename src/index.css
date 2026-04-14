@@ -1,10 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
+:root {
+  --bg: #e8f0ef;
+  --card: #ffffff;
+  --text: #4c5c59;
+  --tags: #e8f0ef;
+  --input: white;
+  --checkbox: white;
+  --title: black;
+}
+
+.dark {
+  --bg: #001414;
+  --card: #001f1f;
+  --text: #b1b9b9;
+  --tags: #002e2d;
+  --input: #014745;
+  --checkbox: #001f1f;
+  --title: white;
+}
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 body {
   min-height: 100vh;
   background-color: antiquewhite;

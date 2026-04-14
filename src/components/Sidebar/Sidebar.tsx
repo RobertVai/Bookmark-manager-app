@@ -10,6 +10,7 @@ type SideBarProps = {
   allTags: string[];
   toggleTag: (tag: string) => void;
   selectedTags: string[];
+
 };
 const Sidebar = ({ allTags, toggleTag, selectedTags }: SideBarProps) => {
   return (
@@ -32,7 +33,7 @@ const Sidebar = ({ allTags, toggleTag, selectedTags }: SideBarProps) => {
         <p className={styles.tagsTitle}>TAGS</p>
         {allTags.map((tag) => (
           <div className={styles.tagline} key={tag}>
-            <input
+            <input className={styles.checkbox}
               type="checkbox"
               checked={selectedTags.includes(tag)}
               onChange={() => toggleTag(tag)}

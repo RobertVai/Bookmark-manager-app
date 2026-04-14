@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./Header.module.css";
 import profileAvatar from "../../assets/images/image-avatar.webp";
 import searchIcon from "../../assets/images/icon-search.svg";
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import { useState } from "react";
 
 type headerProps = {
   search: string;
@@ -16,6 +18,8 @@ type headerProps = {
   setTagsInput: (v: string) => void;
   handleAddBookmark: (e: React.FormEvent) => void;
   setAddProductModal: (value: boolean) => void;
+  theme: "light" | "dark";
+  setTheme: (value: "light" | "dark") => void;
 };
 const Header = ({
   search,
@@ -30,7 +34,10 @@ const Header = ({
   setTagsInput,
   handleAddBookmark,
   setAddProductModal,
+  theme,
+  setTheme,
 }: headerProps) => {
+  const [profileDropdown, setProfileDropdown] = useState(false);
   return (
     <div className={styles.topNav}>
       <div>
@@ -47,7 +54,16 @@ const Header = ({
           <p className={styles.plus}>+</p>
           Add Bookmark
         </button>
-        <img src={profileAvatar} alt="" />
+        <img
+          onClick={() => setProfileDropdown((prev) => !prev)}
+          src={profileAvatar}
+          alt="Profile Avatar"
+        />
+        {profileDropdown && (
+          <div className={styles.headerDropdown}>
+            <ProfileDropdown theme={theme} setTheme={setTheme} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -22,6 +22,8 @@ type LayoutProps = {
   toggleTag: (tag: string) => void;
   setAddProductModal: (value: boolean) => void;
   setProfileDropDown: (value: boolean) => void;
+  theme: "light" | "dark";
+  setTheme: (value: "light" | "dark") => void;
 };
 
 function Layout({
@@ -42,6 +44,8 @@ function Layout({
   selectedTags,
   toggleTag,
   setAddProductModal,
+  theme,
+  setTheme,
 }: LayoutProps) {
   return (
     <div className={styles.pageWrapper}>
@@ -66,6 +70,8 @@ function Layout({
           setTagsInput={setTagsInput}
           handleAddBookmark={handleAddBookmark}
           setAddProductModal={setAddProductModal}
+          theme={theme}
+          setTheme={setTheme}
         />
 
         <main>{children}</main>
