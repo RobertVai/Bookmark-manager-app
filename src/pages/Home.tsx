@@ -22,7 +22,7 @@ function Home({
   handleCopyUrl,
   sortBy,
   setSortBy,
-  handleEditBookmark
+  handleEditBookmark,
 }: HomeProps) {
   return (
     <Main
@@ -35,6 +35,7 @@ function Home({
       setSortBy={setSortBy}
       handleEditBookmark={handleEditBookmark}
       toggleArchiveBookmark={toggleArchiveBookmark}
+      title="All bookmarks"
     />
   );
 }

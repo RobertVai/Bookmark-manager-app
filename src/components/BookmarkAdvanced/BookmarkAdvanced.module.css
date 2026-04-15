@@ -1,23 +1,53 @@
-ul {
-  display: flex;
-  flex-direction: column;
-}
-
-li {
-  list-style: none;
-  cursor: pointer;
-}
-
 .advancedContainer {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 56px;
+  top: 62px;
   right: 16px;
-  background-color: white;
+  background-color: var(--card);
+  border: 1px solid #0b6661;
+  border-radius: 0.9rem;
+  min-width: 215px;
+  z-index: 1003;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
 }
 
-a {
-  color: black;
+.menuList {
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem 0;
+}
+
+.menuList li {
+  list-style: none;
+  cursor: pointer;
+  color: var(--title);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.menuList li:hover {
+  background-color: rgba(1, 71, 69, 0.2);
+}
+
+.menuList a {
+  color: var(--title);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  font-size: 0.95rem;
+  opacity: 0.9;
 }

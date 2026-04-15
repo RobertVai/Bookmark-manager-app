@@ -7,6 +7,15 @@
 .dropdownHeader {
   display: flex;
   gap: 1rem;
+  align-items: center;
+}
+
+.dropdownHeader h4 {
+  color: var(--title);
+}
+
+.dropdownHeader p {
+  color: var(--text);
 }
 
 .themeIcon,
@@ -19,18 +28,39 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.8rem;
 }
 
 .theme {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  color: var(--title);
 }
 
 .changeTheme {
-  background-color: #e8f0ef;
+  background-color: var(--bg);
   display: flex;
   align-items: center;
   max-height: 35px;
   gap: 1.2rem;
   padding: 0.4rem;
+  border-radius: 0.6rem;
+}
+
+.lightTheme,
+.darkTheme {
+  cursor: pointer;
+  padding: 0.15rem;
+  border-radius: 0.35rem;
+}
+
+.activeTheme {
+  outline: 1px solid #014745;
+}
+
+:global(.dark) .themeIcon,
+:global(.dark) .lightTheme,
+:global(.dark) .darkTheme {
+  filter: brightness(0) invert(1);
 }

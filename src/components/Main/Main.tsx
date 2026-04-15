@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { bookmarksData } from "../../data/data";
 import type { Bookmark } from "../../types/bookmark";
 import styles from "./Main.module.css";
 import sortIcon from "../../assets/images/icon-sort.svg";
@@ -19,7 +18,9 @@ type mainProps = {
   setSortBy: (value: any) => void;
   handleEditBookmark: (bookmark: Bookmark) => void;
   toggleArchiveBookmark: (id: number) => void;
+  title: string;
 };
+
 const Main = ({
   filteredBookmarks,
   handleVisit,
@@ -30,6 +31,7 @@ const Main = ({
   setSortBy,
   handleEditBookmark,
   toggleArchiveBookmark,
+  title,
 }: mainProps) => {
   const [advanced, setAdvanced] = useState<number | null>(null);
   const [sortMenu, setSortMenu] = useState(false);
@@ -39,9 +41,9 @@ const Main = ({
   };
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div className={styles.mainLine}>
-        <h3>All bookmarks</h3>
+        <h3>{title}</h3>
         <div className={styles.sortWrapper}>
           <button onClick={handleSortMenu} className={styles.sort}>
             <img src={sortIcon} alt="" />
@@ -51,35 +53,42 @@ const Main = ({
           {sortMenu && (
             <div className={styles.sortMenu}>
               <button
+                className={sortBy === "created" ? styles.activeSort : ""}
                 onClick={() => {
                   setSortBy("created");
                   setSortMenu(false);
                 }}
               >
-                Recently added
+                <span>Recently added</span>
+                {sortBy === "created" && <span>✓</span>}
               </button>
 
               <button
+                className={sortBy === "visited" ? styles.activeSort : ""}
                 onClick={() => {
                   setSortBy("visited");
                   setSortMenu(false);
                 }}
               >
-                Recently visited
+                <span>Recently visited</span>
+                {sortBy === "visited" && <span>✓</span>}
               </button>
 
               <button
+                className={sortBy === "views" ? styles.activeSort : ""}
                 onClick={() => {
                   setSortBy("views");
                   setSortMenu(false);
                 }}
               >
-                Most visited
+                <span>Most visited</span>
+                {sortBy === "views" && <span>✓</span>}
               </button>
             </div>
           )}
         </div>
       </div>
+
       <div className={styles.cards}>
         {filteredBookmarks.map((b) => (
           <div className={styles.card} key={b.id}>
@@ -110,6 +119,7 @@ const Main = ({
                 <img src={editIcon} alt="" />
               </button>
             </div>
+
             {advanced === b.id && (
               <BookmarkAdvanced
                 handleVisit={handleVisit}
@@ -120,9 +130,11 @@ const Main = ({
                 toggleArchiveBookmark={toggleArchiveBookmark}
               />
             )}
+
             <div className={styles.description}>
               <p>{b.description}</p>
             </div>
+
             <div className={styles.tags}>
               {b.tags.map((tag) => (
                 <div key={tag} className={styles.tag}>
@@ -130,6 +142,7 @@ const Main = ({
                 </div>
               ))}
             </div>
+
             <div className={styles.cardFooter}>
               <div className={styles.dateElement}>
                 <img src={visitIcon} alt="" />

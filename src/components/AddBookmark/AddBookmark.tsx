@@ -15,6 +15,7 @@ type AddBookmarkProps = {
   setAddProductModal: (value: boolean) => void;
   editBookmarkId: number | null;
 };
+
 const AddBookmark = ({
   title,
   setTitle,
@@ -32,14 +33,28 @@ const AddBookmark = ({
   return (
     <div className={styles.bookmarkContainer}>
       <div className={styles.bookmarkContent}>
-        <h3>{editBookmarkId !== null ? "Edit Bookmark" : "Add a Bookmark"}</h3>
+        <div className={styles.modalHeader}>
+          <h3>
+            {editBookmarkId !== null ? "Edit Bookmark" : "Add a bookmark"}
+          </h3>
+
+          <button
+            className={styles.closeButton}
+            onClick={onClose}
+            type="button"
+          >
+            ×
+          </button>
+        </div>
+
         <p className={styles.faviconInfo}>
           Save a link with details to keep your collection organized. We extract
           the favicon automatically from the URL.
         </p>
+
         <form onSubmit={handleAddBookmark}>
           <div className={styles.bookmarkRow}>
-            <p>Title*</p>
+            <p>Title *</p>
             <input
               type="text"
               value={title}
@@ -48,7 +63,7 @@ const AddBookmark = ({
           </div>
 
           <div className={styles.bookmarkRow}>
-            <p>Description*</p>
+            <p>Description *</p>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -56,7 +71,7 @@ const AddBookmark = ({
           </div>
 
           <div className={styles.bookmarkRow}>
-            <p>Website URL*</p>
+            <p>Website URL *</p>
             <input
               type="text"
               value={url}
@@ -65,16 +80,21 @@ const AddBookmark = ({
           </div>
 
           <div className={styles.bookmarkRow}>
-            <p>Tags*</p>
+            <p>Tags *</p>
             <input
               type="text"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
+              placeholder="e.g. Design, Learning, Tools"
             />
           </div>
 
           <div className={styles.bookmarkFooter}>
-            <button className={styles.cancelBtn} onClick={onClose}>
+            <button
+              className={styles.cancelBtn}
+              onClick={onClose}
+              type="button"
+            >
               Cancel
             </button>
             <button type="submit">

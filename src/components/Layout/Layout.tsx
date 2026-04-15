@@ -1,4 +1,4 @@
-import type { ReactNode, FormEvent } from "react";
+import { useState, type ReactNode, type FormEvent } from "react";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Layout.module.css";
@@ -21,7 +21,6 @@ type LayoutProps = {
   selectedTags: string[];
   toggleTag: (tag: string) => void;
   setAddProductModal: (value: boolean) => void;
-  setProfileDropDown: (value: boolean) => void;
   theme: "light" | "dark";
   setTheme: (value: "light" | "dark") => void;
 };
@@ -47,15 +46,27 @@ function Layout({
   theme,
   setTheme,
 }: LayoutProps) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className={styles.pageWrapper}>
-      <div className={styles.layout}>
+      {sidebarOpen && (
+        <div
+          className={styles.overlay}
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
+
+      <div className={styles.sidebarWrapper}>
         <Sidebar
           allTags={allTags}
           selectedTags={selectedTags}
           toggleTag={toggleTag}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
         />
       </div>
+
       <div className={styles.content}>
         <Header
           search={search}
@@ -72,6 +83,7 @@ function Layout({
           setAddProductModal={setAddProductModal}
           theme={theme}
           setTheme={setTheme}
+          setSidebarOpen={setSidebarOpen}
         />
 
         <main>{children}</main>

@@ -6,8 +6,13 @@
   --text: #4c5c59;
   --tags: #e8f0ef;
   --input: white;
+  --border: #dce4e4;
   --checkbox: white;
   --title: black;
+  --toast-bg: #ffffff;
+  --toast-text: #1b2b29;
+  --toast-border: #d8e2e0;
+  --toast-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .dark {
@@ -16,9 +21,15 @@
   --text: #b1b9b9;
   --tags: #002e2d;
   --input: #014745;
+  --border: #014745;
   --checkbox: #001f1f;
   --title: white;
+  --toast-bg: #014745;
+  --toast-text: #e8f0ef;
+  --toast-border: #0b6661;
+  --toast-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
 }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -27,7 +38,7 @@
 
 body {
   min-height: 100vh;
-  background-color: antiquewhite;
+  background-color: var(--bg);
   font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;

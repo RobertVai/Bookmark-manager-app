@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Header.module.css";
 import profileAvatar from "../../assets/images/image-avatar.webp";
-import searchIcon from "../../assets/images/icon-search.svg";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import { useState } from "react";
 
@@ -20,7 +19,9 @@ type headerProps = {
   setAddProductModal: (value: boolean) => void;
   theme: "light" | "dark";
   setTheme: (value: "light" | "dark") => void;
+  setSidebarOpen: (value: boolean) => void;
 };
+
 const Header = ({
   search,
   setSearch,
@@ -36,17 +37,31 @@ const Header = ({
   setAddProductModal,
   theme,
   setTheme,
+  setSidebarOpen,
 }: headerProps) => {
   const [profileDropdown, setProfileDropdown] = useState(false);
+
   return (
     <div className={styles.topNav}>
-      <div>
-        <input
-          type="text"
-          placeholder="🔍︎Search by title..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className={styles.leftSide}>
+        <button
+          type="button"
+          className={styles.burgerButton}
+          onClick={() => setSidebarOpen(true)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div className={styles.searchBox}>
+          <input
+            type="text"
+            placeholder="Search by title..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className={styles.topRightNav}>
@@ -54,11 +69,14 @@ const Header = ({
           <p className={styles.plus}>+</p>
           Add Bookmark
         </button>
+
         <img
+          className={styles.avatar}
           onClick={() => setProfileDropdown((prev) => !prev)}
           src={profileAvatar}
           alt="Profile Avatar"
         />
+
         {profileDropdown && (
           <div className={styles.headerDropdown}>
             <ProfileDropdown theme={theme} setTheme={setTheme} />

@@ -1,8 +1,4 @@
 import React from "react";
-import visitIcon from "../../assets/images/icon-last-visited.svg";
-import copyIcon from "../../assets/images/icon-last-visited.svg";
-import unarchiveIcon from "../../assets/images/icon-unarchive.svg";
-import deleteIcon from "../../assets/images/icon-last-visited.svg";
 import styles from "./BookmarkAdvanced.module.css";
 import type { Bookmark } from "../../types/bookmark";
 
@@ -14,6 +10,7 @@ type BookmarkAdvancedProps = {
   handleEditBookmark: (bookmark: Bookmark) => void;
   toggleArchiveBookmark: (id: number) => void;
 };
+
 const BookmarkAdvanced = ({
   handleVisit,
   b,
@@ -24,19 +21,33 @@ const BookmarkAdvanced = ({
 }: BookmarkAdvancedProps) => {
   return (
     <div className={styles.advancedContainer}>
-      <ul>
+      <ul className={styles.menuList}>
         <li onClick={() => handleVisit(b.id)}>
           <a href={b.url} target="_blank" rel="noopener noreferrer">
+            <span className={styles.icon}>↗</span>
             Visit
           </a>
         </li>
-        <li onClick={() => handleEditBookmark(b)}>Edit</li>
-        <li onClick={() => handleCopyUrl(b.url)}>Copy URL</li>
+
+        <li onClick={() => handleEditBookmark(b)}>
+          <span className={styles.icon}>✎</span>
+          Edit
+        </li>
+
+        <li onClick={() => handleCopyUrl(b.url)}>
+          <span className={styles.icon}>⧉</span>
+          Copy URL
+        </li>
 
         <li onClick={() => toggleArchiveBookmark(b.id)}>
+          <span className={styles.icon}>↺</span>
           {b.isArchived ? "Unarchive" : "Archive"}
         </li>
-        <li onClick={() => deleteBookmark(b.id)}>Delete Permanently</li>
+
+        <li onClick={() => deleteBookmark(b.id)}>
+          <span className={styles.icon}>🗑</span>
+          Delete Permanently
+        </li>
       </ul>
     </div>
   );

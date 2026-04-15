@@ -3,16 +3,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-left: 1px solid #e5eeed;
+  border-bottom: 1px solid var(--border);
   padding: 1rem 2rem;
+  gap: 1rem;
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.searchBox {
+  min-width: 0;
 }
 
 .topNav input {
   background-color: var(--input);
-  padding: 0.8rem;
-  border-radius: 0.5rem;
+  color: var(--title);
+  padding: 0.8rem 1rem;
+  border-radius: 0.7rem;
   width: 300px;
-  border: 1px solid grey;
+  border: 1px solid #0b6661;
+}
+
+.topNav input::placeholder {
+  color: var(--text);
 }
 
 .topRightNav {
@@ -26,13 +43,18 @@
   height: 40px;
 }
 
+.avatar {
+  cursor: pointer;
+  border-radius: 50%;
+}
+
 .topRightNav button {
   background-color: #014745;
   color: white;
   font-size: 1rem;
-  padding: 0.3rem;
+  padding: 0.5rem 0.9rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.7rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -42,17 +64,96 @@
 .plus {
   font-size: 2rem;
   font-weight: 100;
+  line-height: 1;
 }
 
 .headerDropdown {
   position: absolute;
-  min-width: 220px;
-  background-color: white;
-  border: 1px solid #dcdcdc;
+  min-width: 260px;
+  background-color: var(--card);
+  border: 1px solid #0b6661;
   border-radius: 12px;
   padding: 12px;
   gap: 10px;
-  z-index: 1000;
-  top: 3.3rem;
+  z-index: 1002;
+  top: 3.6rem;
   right: 0.1px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+
+.burgerButton {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #0b6661;
+  border-radius: 0.7rem;
+  background-color: var(--input);
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.burgerButton span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--title);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .topNav {
+    padding: 1rem;
+    border-left: none;
+  }
+
+  .burgerButton {
+    display: flex;
+  }
+
+  .topNav input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .searchBox {
+    width: 100%;
+  }
+
+  .leftSide {
+    flex: 1;
+  }
+
+  .topRightNav button {
+    padding: 0.65rem 0.8rem;
+    font-size: 0;
+    gap: 0;
+  }
+
+  .plus {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topNav {
+    gap: 0.7rem;
+  }
+
+  .leftSide {
+    gap: 0.7rem;
+  }
+
+  .topNav input {
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  .headerDropdown {
+    right: 0;
+    min-width: 230px;
+  }
 }

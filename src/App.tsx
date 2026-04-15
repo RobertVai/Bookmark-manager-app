@@ -7,7 +7,7 @@ import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home";
 import Archived from "./pages/Archived";
 import AddBookmark from "./components/AddBookmark/AddBookmark";
-import BookmarkAdvanced from "./components/BookmarkAdvanced/BookmarkAdvanced";
+import Toast from "./components/Toast/Toast";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -23,12 +23,23 @@ function App() {
   );
   const [editBookmarkId, setEditBookmarkId] = useState<number | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setToastVisible(true);
+
+    setTimeout(() => {
+      setToastVisible(false);
+    }, 2500);
+  };
 
   const handleEditBookmark = (bookmark: Bookmark) => {
     setTitle(bookmark.title);
     setDescription(bookmark.description);
     setUrl(bookmark.url);
-    setTagsInput(bookmark.tags.join(","));
+    setTagsInput(bookmark.tags.join(", "));
     setEditBookmarkId(bookmark.id);
     setAddProductModal(true);
   };
@@ -49,18 +60,26 @@ function App() {
                 title,
                 url,
                 description,
-                tags: tagsInput.split(",").map((t) => t.trim()),
+                tags: tagsInput
+                  .split(",")
+                  .map((t) => t.trim())
+                  .filter(Boolean),
               }
             : bookmark,
         ),
       );
+
+      showToast("Changes saved.");
     } else {
       const newBookmark: Bookmark = {
         id: Date.now(),
         title,
         description,
         url,
-        tags: tagsInput.split(","),
+        tags: tagsInput
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
         visitCount: 0,
         createdAt: new Date().toISOString(),
         lastVisited: null,
@@ -68,7 +87,9 @@ function App() {
       };
 
       setBookmarks((prev) => [...prev, newBookmark]);
+      showToast("Bookmark added successfully.");
     }
+
     setTitle("");
     setDescription("");
     setUrl("");
@@ -77,7 +98,10 @@ function App() {
     setEditBookmarkId(null);
   };
 
-  const filteredBookmarks = bookmarks.filter((bookmark) => {
+  const activeBookmarks = bookmarks.filter((b) => !b.isArchived);
+  const archivedBookmarks = bookmarks.filter((b) => b.isArchived);
+
+  const filteredBookmarks = activeBookmarks.filter((bookmark) => {
     const matchesSearch = bookmark.title
       .toLowerCase()
       .includes(search.toLowerCase());
@@ -89,22 +113,42 @@ function App() {
     return matchesSearch && matchesTags;
   });
 
-  const sortedBookmarks = [...filteredBookmarks].sort((a, b) => {
-    if (sortBy === "visited") {
-      const aTime = a.lastVisited ? new Date(a.lastVisited).getTime() : 0;
-      const bTime = b.lastVisited ? new Date(b.lastVisited).getTime() : 0;
-      return bTime - aTime;
-    }
-    if (sortBy === "created") {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    }
+  const filteredArchivedBookmarks = archivedBookmarks.filter((bookmark) => {
+    const matchesSearch = bookmark.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
-    if (sortBy === "views") {
-      return b.visitCount - a.visitCount;
-    }
+    const matchesTags =
+      selectedTags.length === 0 ||
+      selectedTags.some((tag) => bookmark.tags.includes(tag));
 
-    return 0;
+    return matchesSearch && matchesTags;
   });
+
+  const sortBookmarks = (items: Bookmark[]) => {
+    return [...items].sort((a, b) => {
+      if (sortBy === "visited") {
+        const aTime = a.lastVisited ? new Date(a.lastVisited).getTime() : 0;
+        const bTime = b.lastVisited ? new Date(b.lastVisited).getTime() : 0;
+        return bTime - aTime;
+      }
+
+      if (sortBy === "created") {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      }
+
+      if (sortBy === "views") {
+        return b.visitCount - a.visitCount;
+      }
+
+      return 0;
+    });
+  };
+
+  const sortedBookmarks = sortBookmarks(filteredBookmarks);
+  const sortedArchivedBookmarks = sortBookmarks(filteredArchivedBookmarks);
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
@@ -113,23 +157,27 @@ function App() {
   };
 
   const deleteBookmark = (id: number) => {
-    setBookmarks((prev) => {
-      return prev.filter((b) => b.id !== id);
-    });
+    setBookmarks((prev) => prev.filter((b) => b.id !== id));
+    showToast("Bookmark deleted.");
   };
 
   const toggleArchiveBookmark = (id: number) => {
-    return setBookmarks((prev) =>
+    const target = bookmarks.find((b) => b.id === id);
+
+    setBookmarks((prev) =>
       prev.map((b) => (b.id === id ? { ...b, isArchived: !b.isArchived } : b)),
     );
+
+    if (target?.isArchived) {
+      showToast("Bookmark restored.");
+    } else {
+      showToast("Bookmark archived.");
+    }
   };
 
-  const activeBookmarks = bookmarks.filter((b) => !b.isArchived);
-  const archivedBookmarks = bookmarks.filter((b) => b.isArchived);
-
   const handleVisit = (id: number) => {
-    setBookmarks((prev) => {
-      return prev.map((b) =>
+    setBookmarks((prev) =>
+      prev.map((b) =>
         b.id === id
           ? {
               ...b,
@@ -137,16 +185,16 @@ function App() {
               lastVisited: new Date().toISOString(),
             }
           : b,
-      );
-    });
+      ),
+    );
   };
 
   const handleCopyUrl = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
-      alert("Copied to clipboard!");
+      showToast("Link copied to clipboard.");
     } catch (error) {
-      alert("Error copying");
+      showToast("Error copying link.");
     }
   };
 
@@ -156,6 +204,7 @@ function App() {
     setDescription("");
     setUrl("");
     setTagsInput("");
+    setEditBookmarkId(null);
   };
 
   const formatShortDate = (date: string | null) => {
@@ -216,6 +265,12 @@ function App() {
             />
           )}
 
+          <Toast
+            toastMessage={toastMessage}
+            toastVisible={toastVisible}
+            setToastVisible={setToastVisible}
+          />
+
           <Routes>
             <Route
               path="/"
@@ -237,7 +292,7 @@ function App() {
               path="/archived"
               element={
                 <Archived
-                  filteredBookmarks={archivedBookmarks}
+                  filteredBookmarks={sortedArchivedBookmarks}
                   toggleArchiveBookmark={toggleArchiveBookmark}
                   handleVisit={handleVisit}
                   formatShortDate={formatShortDate}

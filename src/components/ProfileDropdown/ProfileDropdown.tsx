@@ -29,13 +29,13 @@ const ProfileDropdown = ({ theme, setTheme }: ProfileDropdownProps) => {
 
         <div className={styles.changeTheme}>
           <img
-            className={styles.lightTheme}
+            className={`${styles.lightTheme} ${theme === "light" ? styles.activeTheme : ""}`}
             src={lightTheme}
             alt="Light Theme"
             onClick={() => setTheme("light")}
           />
           <img
-            className={styles.darkTheme}
+            className={`${styles.darkTheme} ${theme === "dark" ? styles.activeTheme : ""}`}
             src={darkTheme}
             alt="Dark Theme"
             onClick={() => setTheme("dark")}

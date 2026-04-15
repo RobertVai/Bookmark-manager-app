@@ -25,19 +25,18 @@ function Archived({
   handleEditBookmark,
 }: ArchivedProps) {
   return (
-    <div>
-      <Main
-        filteredBookmarks={filteredBookmarks}
-        toggleArchiveBookmark={toggleArchiveBookmark}
-        handleVisit={handleVisit}
-        formatShortDate={formatShortDate}
-        deleteBookmark={deleteBookmark}
-        handleCopyUrl={handleCopyUrl}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        handleEditBookmark={handleEditBookmark}
-      />
-    </div>
+    <Main
+      filteredBookmarks={filteredBookmarks}
+      toggleArchiveBookmark={toggleArchiveBookmark}
+      handleVisit={handleVisit}
+      formatShortDate={formatShortDate}
+      deleteBookmark={deleteBookmark}
+      handleCopyUrl={handleCopyUrl}
+      sortBy={sortBy}
+      setSortBy={setSortBy}
+      handleEditBookmark={handleEditBookmark}
+      title="Archived bookmarks"
+    />
   );
 }
 

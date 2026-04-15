@@ -4,8 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 1200;
+  padding: 1rem;
 }
 
 .bookmarkContent {
@@ -14,71 +15,131 @@
   justify-content: center;
   width: 100%;
   max-width: 570px;
-  background: white;
-  border-radius: 0.7rem;
-  padding: 2rem;
-  gap: 0.5rem;
+  background: var(--card);
+  border: 1px solid #0b6661;
+  border-radius: 1rem;
+  padding: 1.8rem;
+  gap: 0.7rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .bookmarkContent h3 {
-  font-size: 1.5rem;
+  color: var(--title);
+  font-size: 2rem;
   font-weight: 700;
 }
 
-.faviconInfo {
-  color: #5b6966;
-  font-size: 0.9rem;
-  font-weight: 600;
+.closeButton {
+  background: transparent;
+  color: var(--title);
+  border: 1px solid #0b6661;
+  border-radius: 0.6rem;
+  width: 38px;
+  height: 38px;
+  font-size: 1.7rem;
+  cursor: pointer;
+  line-height: 1;
 }
+
+.faviconInfo {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
 form {
   display: flex;
   flex-direction: column;
   padding-top: 1rem;
-  gap: 1.5rem;
+  gap: 1.3rem;
 }
 
 .bookmarkFooter {
   display: flex;
   justify-content: flex-end;
-  padding-top: 0.5rem;
+  padding-top: 0.8rem;
   gap: 1rem;
 }
 
 form input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid grey;
-  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #0b6661;
+  border-radius: 0.7rem;
+  background-color: var(--input);
+  color: var(--title);
+  font-size: 1rem;
+}
+
+form input::placeholder {
+  color: var(--text);
 }
 
 form textarea {
   min-width: 100%;
   max-width: 100%;
-  padding: 0.3rem;
-  border: 1px solid grey;
-  border-radius: 0.5rem;
+  min-height: 130px;
+  padding: 0.9rem 1rem;
+  border: 1px solid #0b6661;
+  border-radius: 0.7rem;
+  background-color: var(--input);
+  color: var(--title);
+  font-size: 1rem;
+  resize: vertical;
 }
 
 form button {
   background-color: #014745;
   color: white;
   font-size: 1rem;
-  border: 1px solid grey;
-  border-radius: 0.5rem;
-  padding: 0.7rem;
+  border: 1px solid #0b6661;
+  border-radius: 0.7rem;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
 }
+
 .cancelBtn {
-  background-color: white;
-  color: black;
+  background-color: transparent;
+  color: var(--title);
 }
 
 .bookmarkRow {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 
 .bookmarkRow p {
+  color: var(--title);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .bookmarkContent {
+    padding: 1.2rem;
+  }
+
+  .bookmarkContent h3 {
+    font-size: 1.5rem;
+  }
+
+  .faviconInfo {
+    font-size: 0.95rem;
+  }
+
+  .bookmarkFooter {
+    flex-direction: column;
+  }
+
+  .bookmarkFooter button {
+    width: 100%;
+  }
 }
